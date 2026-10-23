@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="QuizBlitz — Real-time multiplayer quiz platform. Host a quiz or join with a code. Categories include History, Coding, Math, Reasoning, Science and more.">
+  <title>QuizBlitz — Real-Time Quiz Arena</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <!-- ═══════ Particle Canvas Background ═══════ -->
+  <canvas id="particleCanvas"></canvas>
+
+  <!-- ═══════ LANDING SCREEN ═══════ -->
+  <section id="screen-landing" class="screen active">
+    <div class="landing-container">
+      <div class="logo-section">
+        <div class="logo-icon">
+          <svg viewBox="0 0 80 80" fill="none">
+            <rect x="4" y="4" width="72" height="72" rx="18" stroke="url(#grad1)" stroke-width="4"/>
+            <path d="M28 28 L52 28 L52 40 L40 52 L40 40 L28 40 Z" fill="url(#grad2)"/>
+            <circle cx="40" cy="58" r="4" fill="#FFD600"/>
+            <defs>
+              <linearGradient id="grad1" x1="0" y1="0" x2="80" y2="80">
+                <stop offset="0%" stop-color="#FFD600"/>
+                <stop offset="100%" stop-color="#FF4D94"/>
+              </linearGradient>
+              <linearGradient id="grad2" x1="28" y1="28" x2="52" y2="52">
+                <stop offset="0%" stop-color="#FFD600"/>
+                <stop offset="100%" stop-color="#FF4D94"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <h1 class="logo-title">Quiz<span class="accent-pink">Blitz</span></h1>
+        <p class="logo-subtitle">The Ultimate Real-Time Quiz Arena</p>
+      </div>
+      <div class="landing-actions">
+        <button id="btn-host" class="btn btn-primary btn-large">
+          <span class="btn-icon">⚡</span>
+          Host a Quiz
+        </button>
+        <button id="btn-join" class="btn btn-secondary btn-large">
+          <span class="btn-icon">🎮</span>
+          Join a Quiz
+        </button>
+        <button id="btn-practice" class="btn btn-practice btn-large">
+          <span class="btn-icon">🧠</span>
+          Practice Solo
+        </button>
+      </div>
+      <div class="landing-features">
+        <div class="feature-tag"><span>📚</span> 6+ Categories</div>
+        <div class="feature-tag"><span>⏱️</span> Real-Time</div>
+        <div class="feature-tag"><span>🏆</span> Leaderboard</div>
+        <div class="feature-tag"><span>🎯</span> Speed Bonus</div>
+        <div class="feature-tag"><span>🧠</span> Practice Mode</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ JOIN SCREEN ═══════ -->
+  <section id="screen-join" class="screen">
+    <div class="screen-container">
+      <button class="btn-back" id="btn-back-join">← Back</button>
+      <div class="card glass-card">
+        <h2 class="card-title">Join <span class="accent-yellow">Quiz</span></h2>
+        <p class="card-subtitle">Enter the room code shared by your host</p>
+        <div class="form-group">
+          <label>Room Code</label>
+          <input type="text" id="input-room-code" class="input" placeholder="e.g. ABC123" maxlength="6" autocomplete="off">
+        </div>
+        <div class="form-group">
+          <label>Team Name</label>
+          <input type="text" id="input-team-name" class="input" placeholder="Enter your team name" maxlength="20" autocomplete="off">
+        </div>
+        <button id="btn-submit-join" class="btn btn-primary btn-full">
+          Join Room 🚀
+        </button>
+        <p id="join-error" class="error-text"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ HOST SETUP SCREEN ═══════ -->
+  <section id="screen-host-setup" class="screen">
+    <div class="screen-container">
+      <button class="btn-back" id="btn-back-host">← Back</button>
+      <div class="card glass-card card-wide">
+        <h2 class="card-title">Create <span class="accent-pink">Quiz Room</span></h2>
+        <p class="card-subtitle">Configure your quiz settings</p>
+
+        <div class="form-group">
+          <label>Host Name</label>
+          <input type="text" id="input-host-name" class="input" placeholder="Your display name" maxlength="20" autocomplete="off">
+        </div>
+
+        <div class="form-group">
+          <label>Time Per Question (seconds)</label>
+          <div class="time-selector">
+            <button class="time-btn" data-time="15">15s</button>
+            <button class="time-btn active" data-time="30">30s</button>
+            <button class="time-btn" data-time="45">45s</button>
+            <button class="time-btn" data-time="60">60s</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Question Mode</label>
+          <div class="mode-selector">
+            <button class="mode-btn active" data-mode="random">
+              <span class="mode-icon">🎲</span>
+              <span class="mode-label">Random</span>
+              <span class="mode-desc">Auto-pick from pool</span>
+            </button>
+            <button class="mode-btn" data-mode="default">
+              <span class="mode-icon">📋</span>
+              <span class="mode-label">All Default</span>
+              <span class="mode-desc">Use all questions</span>
+            </button>
+            <button class="mode-btn" data-mode="custom">
+              <span class="mode-icon">✏️</span>
+              <span class="mode-label">Custom</span>
+              <span class="mode-desc">Add your own</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Categories</label>
+          <div id="category-selector" class="category-grid"></div>
+        </div>
+
+        <!-- Custom Questions Panel -->
+        <div id="custom-questions-panel" class="custom-panel hidden">
+          <h3 class="panel-title">Custom Questions</h3>
+          <div id="custom-questions-list" class="custom-questions-list"></div>
+          <button id="btn-add-custom-q" class="btn btn-outline btn-small">+ Add Question</button>
+        </div>
+
+        <button id="btn-create-room" class="btn btn-primary btn-full">
+          Create Room ⚡
+        </button>
+        <p id="host-error" class="error-text"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ HOST LOBBY SCREEN ═══════ -->
+  <section id="screen-host-lobby" class="screen">
+    <div class="screen-container">
+      <div class="lobby-header">
+        <h2 class="card-title">Room: <span class="accent-yellow room-code-display" id="lobby-room-code"></span></h2>
+        <p class="card-subtitle">Share this code with your players</p>
+        <div class="room-code-box" id="room-code-copy">
+          <span id="room-code-text"></span>
+          <button class="btn-copy" title="Copy code">📋</button>
+        </div>
+      </div>
+
+      <div class="lobby-body">
+        <div class="lobby-teams-section">
+          <h3><span class="accent-pink">Teams</span> Joined</h3>
+          <div id="lobby-teams-list" class="teams-grid"></div>
+          <p id="lobby-no-teams" class="muted-text">Waiting for players to join...</p>
+        </div>
+
+        <div class="lobby-controls">
+          <div class="question-count-badge">
+            <span id="question-count">0</span> Questions Loaded
+          </div>
+          <button id="btn-edit-questions" class="btn btn-outline">✏️ Edit Questions</button>
+          <button id="btn-start-quiz" class="btn btn-primary btn-large btn-full">
+            Start Quiz 🚀
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ PLAYER LOBBY SCREEN ═══════ -->
+  <section id="screen-player-lobby" class="screen">
+    <div class="screen-container">
+      <div class="card glass-card">
+        <div class="player-avatar-large" id="player-avatar-lobby"></div>
+        <h2 class="card-title">You're in! 🎉</h2>
+        <p class="card-subtitle">Room: <span class="accent-yellow" id="player-room-code"></span></p>
+        <p class="card-subtitle">Team: <span class="accent-pink" id="player-team-display"></span></p>
+        <div class="waiting-animation">
+          <div class="pulse-ring"></div>
+          <p>Waiting for host to start the quiz...</p>
+        </div>
+        <div id="player-lobby-teams" class="teams-grid small-grid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ QUIZ ACTIVE SCREEN ═══════ -->
+  <section id="screen-quiz" class="screen">
+    <div class="screen-container quiz-container">
+      <!-- Quiz Header -->
+      <div class="quiz-header">
+        <div class="quiz-progress">
+          <span class="q-counter">Q<span id="q-current">1</span>/<span id="q-total">10</span></span>
+          <div class="progress-bar">
+            <div class="progress-fill" id="q-progress-fill"></div>
+          </div>
+        </div>
+        <div class="quiz-timer" id="quiz-timer">
+          <svg class="timer-ring" viewBox="0 0 60 60">
+            <circle class="timer-bg" cx="30" cy="30" r="26"/>
+            <circle class="timer-fg" id="timer-circle" cx="30" cy="30" r="26"/>
+          </svg>
+          <span class="timer-text" id="timer-text">30</span>
+        </div>
+        <div class="quiz-category-badge" id="q-category">History</div>
+      </div>
+
+      <!-- Question -->
+      <div class="question-card" id="question-card">
+        <p class="question-text" id="question-text"></p>
+      </div>
+
+      <!-- Options -->
+      <div class="options-grid" id="options-grid"></div>
+
+      <!-- Host Controls (visible only to host) -->
+      <div class="host-controls" id="host-controls" style="display:none;">
+        <div class="answer-counter">
+          <span id="answer-count">0</span>/<span id="answer-total">0</span> answered
+        </div>
+        <button id="btn-next-q" class="btn btn-primary">Next Question →</button>
+        <button id="btn-end-quiz" class="btn btn-outline btn-danger">End Quiz</button>
+      </div>
+
+      <!-- Player feedback (visible after answering) -->
+      <div class="player-feedback" id="player-feedback" style="display:none;">
+        <div class="feedback-icon" id="feedback-icon"></div>
+        <p class="feedback-text" id="feedback-text"></p>
+        <p class="feedback-points" id="feedback-points"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ RESULTS SCREEN (after each question) ═══════ -->
+  <section id="screen-results" class="screen">
+    <div class="screen-container">
+      <div class="results-card glass-card">
+        <h2 class="card-title">Results</h2>
+        <div class="correct-answer-box">
+          <span class="label">Correct Answer:</span>
+          <span class="answer-text" id="correct-answer-text"></span>
+        </div>
+        <p class="explanation-text" id="explanation-text"></p>
+        <h3 class="accent-yellow">Leaderboard</h3>
+        <div class="leaderboard" id="results-leaderboard"></div>
+        <!-- host-only next button -->
+        <div id="results-host-controls" style="display:none;">
+          <button id="btn-results-next" class="btn btn-primary btn-large btn-full">Next Question →</button>
+          <button id="btn-results-end" class="btn btn-outline btn-danger btn-full" style="margin-top:0.5rem;">End Quiz</button>
+        </div>
+        <p id="results-player-msg" class="muted-text">Waiting for host...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ FINAL SCREEN ═══════ -->
+  <section id="screen-final" class="screen">
+    <div class="screen-container">
+      <div class="final-card glass-card">
+        <div class="trophy-animation">🏆</div>
+        <h1 class="final-title">Quiz <span class="accent-pink">Complete!</span></h1>
+        <div class="podium" id="podium"></div>
+        <h3 class="accent-yellow" style="margin-top:2rem;">Final Leaderboard</h3>
+        <div class="leaderboard" id="final-leaderboard"></div>
+        <button id="btn-play-again" class="btn btn-primary btn-large" style="margin-top:2rem;">Play Again 🔄</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ PRACTICE SETUP SCREEN ═══════ -->
+  <section id="screen-practice-setup" class="screen">
+    <div class="screen-container">
+      <button class="btn-back" id="btn-back-practice">← Back</button>
+      <div class="card glass-card card-wide">
+        <div class="practice-badge">🧠</div>
+        <h2 class="card-title">Practice <span class="accent-pink">Mode</span></h2>
+        <p class="card-subtitle">Sharpen your skills — play solo across all categories</p>
+
+        <div class="form-group">
+          <label>Select Categories</label>
+          <div id="practice-category-selector" class="category-grid"></div>
+        </div>
+
+        <div class="form-group">
+          <label>Number of Questions</label>
+          <div class="time-selector">
+            <button class="pcount-btn" data-count="5">5</button>
+            <button class="pcount-btn active" data-count="10">10</button>
+            <button class="pcount-btn" data-count="15">15</button>
+            <button class="pcount-btn" data-count="20">20</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Time Per Question</label>
+          <div class="time-selector">
+            <button class="ptime-btn" data-time="15">15s</button>
+            <button class="ptime-btn active" data-time="30">30s</button>
+            <button class="ptime-btn" data-time="45">45s</button>
+            <button class="ptime-btn" data-time="0">∞ No Limit</button>
+          </div>
+        </div>
+
+        <button id="btn-start-practice" class="btn btn-primary btn-full btn-large">
+          Start Practice 🚀
+        </button>
+        <p id="practice-error" class="error-text"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ PRACTICE QUIZ SCREEN ═══════ -->
+  <section id="screen-practice-quiz" class="screen">
+    <div class="screen-container quiz-container">
+      <!-- Practice Header -->
+      <div class="quiz-header">
+        <div class="quiz-progress">
+          <span class="q-counter">Q<span id="pq-current">1</span>/<span id="pq-total">10</span></span>
+          <div class="progress-bar">
+            <div class="progress-fill" id="pq-progress-fill"></div>
+          </div>
+        </div>
+        <div class="quiz-timer" id="practice-timer">
+          <svg class="timer-ring" viewBox="0 0 60 60">
+            <circle class="timer-bg" cx="30" cy="30" r="26"/>
+            <circle class="timer-fg" id="ptimer-circle" cx="30" cy="30" r="26"/>
+          </svg>
+          <span class="timer-text" id="ptimer-text">30</span>
+        </div>
+        <div class="quiz-category-badge" id="pq-category">All</div>
+      </div>
+
+      <!-- Practice Score Bar -->
+      <div class="practice-score-bar">
+        <div class="pscore-item"><span class="pscore-label">Score</span><span class="pscore-value accent-yellow" id="practice-score">0</span></div>
+        <div class="pscore-item"><span class="pscore-label">Streak</span><span class="pscore-value accent-pink" id="practice-streak">0 🔥</span></div>
+        <div class="pscore-item"><span class="pscore-label">Correct</span><span class="pscore-value" id="practice-correct-count" style="color:var(--success)">0</span></div>
+      </div>
+
+      <!-- Question -->
+      <div class="question-card" id="practice-question-card">
+        <p class="question-text" id="practice-question-text"></p>
+      </div>
+
+      <!-- Options -->
+      <div class="options-grid" id="practice-options-grid"></div>
+
+      <!-- Feedback + Next -->
+      <div class="practice-feedback-area" id="practice-feedback-area" style="display:none;">
+        <div class="player-feedback" id="practice-fb">
+          <div class="feedback-icon" id="practice-fb-icon"></div>
+          <p class="feedback-text" id="practice-fb-text"></p>
+          <p class="feedback-points" id="practice-fb-points"></p>
+          <p class="practice-explanation" id="practice-fb-explanation"></p>
+        </div>
+        <button id="btn-practice-next" class="btn btn-primary btn-full" style="margin-top:1rem;">Next Question →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ PRACTICE COMPLETE SCREEN ═══════ -->
+  <section id="screen-practice-complete" class="screen">
+    <div class="screen-container">
+      <div class="final-card glass-card">
+        <div class="trophy-animation" id="practice-trophy">🧠</div>
+        <h1 class="final-title">Practice <span class="accent-pink">Complete!</span></h1>
+
+        <div class="practice-stats-grid">
+          <div class="pstat-card">
+            <span class="pstat-value accent-yellow" id="ps-score">0</span>
+            <span class="pstat-label">Total Score</span>
+          </div>
+          <div class="pstat-card">
+            <span class="pstat-value" style="color:var(--success)" id="ps-correct">0</span>
+            <span class="pstat-label">Correct</span>
+          </div>
+          <div class="pstat-card">
+            <span class="pstat-value" style="color:var(--error)" id="ps-wrong">0</span>
+            <span class="pstat-label">Wrong</span>
+          </div>
+          <div class="pstat-card">
+            <span class="pstat-value accent-pink" id="ps-accuracy">0%</span>
+            <span class="pstat-label">Accuracy</span>
+          </div>
+          <div class="pstat-card">
+            <span class="pstat-value accent-yellow" id="ps-best-streak">0</span>
+            <span class="pstat-label">Best Streak</span>
+          </div>
+          <div class="pstat-card">
+            <span class="pstat-value" style="color:var(--gray-light)" id="ps-avg-time">0s</span>
+            <span class="pstat-label">Avg Time</span>
+          </div>
+        </div>
+
+        <h3 class="accent-yellow" style="margin-top:2rem;">Question Breakdown</h3>
+        <div class="practice-breakdown" id="practice-breakdown"></div>
+
+        <div style="display:flex;gap:1rem;margin-top:2rem;">
+          <button id="btn-practice-retry" class="btn btn-primary btn-large" style="flex:1;">Retry 🔄</button>
+          <button id="btn-practice-home" class="btn btn-secondary btn-large" style="flex:1;">Home 🏠</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════ QUESTION EDITOR MODAL ═══════ -->
+  <div id="modal-editor" class="modal-overlay hidden">
+    <div class="modal glass-card">
+      <div class="modal-header">
+        <h2>Question <span class="accent-pink">Editor</span></h2>
+        <button id="btn-close-editor" class="btn-close">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="editor-toolbar">
+          <select id="editor-category-filter" class="select-input">
+            <option value="all">All Categories</option>
+          </select>
+          <button id="btn-editor-add" class="btn btn-primary btn-small">+ Add Question</button>
+        </div>
+        <div id="editor-questions-list" class="editor-list"></div>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-editor-save" class="btn btn-primary">Save & Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ ADD/EDIT QUESTION MODAL ═══════ -->
+  <div id="modal-add-question" class="modal-overlay hidden">
+    <div class="modal glass-card modal-small">
+      <div class="modal-header">
+        <h2 id="add-q-title">Add <span class="accent-yellow">Question</span></h2>
+        <button id="btn-close-add-q" class="btn-close">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Category</label>
+          <input type="text" id="aq-category" class="input" placeholder="e.g. History">
+        </div>
+        <div class="form-group">
+          <label>Question</label>
+          <textarea id="aq-question" class="input textarea" placeholder="Enter your question"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Option A</label>
+          <input type="text" id="aq-opt-0" class="input" placeholder="Option A">
+        </div>
+        <div class="form-group">
+          <label>Option B</label>
+          <input type="text" id="aq-opt-1" class="input" placeholder="Option B">
+        </div>
+        <div class="form-group">
+          <label>Option C</label>
+          <input type="text" id="aq-opt-2" class="input" placeholder="Option C">
+        </div>
+        <div class="form-group">
+          <label>Option D</label>
+          <input type="text" id="aq-opt-3" class="input" placeholder="Option D">
+        </div>
+        <div class="form-group">
+          <label>Correct Answer</label>
+          <select id="aq-correct" class="select-input">
+            <option value="0">Option A</option>
+            <option value="1">Option B</option>
+            <option value="2">Option C</option>
+            <option value="3">Option D</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Explanation (optional)</label>
+          <input type="text" id="aq-explanation" class="input" placeholder="Brief explanation">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-save-question" class="btn btn-primary">Save Question</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/particles.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>

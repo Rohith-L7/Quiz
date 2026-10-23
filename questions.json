@@ -1,0 +1,212 @@
+[
+  {
+    "category": "History",
+    "question": "Who was the first Emperor of Rome?",
+    "options": ["Julius Caesar", "Augustus", "Nero", "Caligula"],
+    "correct": 1,
+    "explanation": "Augustus (born Octavian) became the first Roman Emperor in 27 BC."
+  },
+  {
+    "category": "History",
+    "question": "In which year did the Berlin Wall fall?",
+    "options": ["1987", "1988", "1989", "1991"],
+    "correct": 2,
+    "explanation": "The Berlin Wall fell on November 9, 1989."
+  },
+  {
+    "category": "History",
+    "question": "Which ancient civilization built Machu Picchu?",
+    "options": ["Aztec", "Maya", "Inca", "Olmec"],
+    "correct": 2,
+    "explanation": "Machu Picchu was built by the Inca civilization in the 15th century."
+  },
+  {
+    "category": "History",
+    "question": "Who painted the Mona Lisa?",
+    "options": ["Michelangelo", "Raphael", "Donatello", "Leonardo da Vinci"],
+    "correct": 3,
+    "explanation": "Leonardo da Vinci painted the Mona Lisa between 1503 and 1519."
+  },
+  {
+    "category": "History",
+    "question": "The Magna Carta was signed in which year?",
+    "options": ["1066", "1215", "1492", "1776"],
+    "correct": 1,
+    "explanation": "The Magna Carta was sealed by King John of England in 1215."
+  },
+  {
+    "category": "Coding",
+    "question": "What does HTML stand for?",
+    "options": ["Hyper Text Markup Language", "High Tech Modern Language", "Hyper Transfer Markup Language", "Home Tool Markup Language"],
+    "correct": 0,
+    "explanation": "HTML stands for HyperText Markup Language."
+  },
+  {
+    "category": "Coding",
+    "question": "Which language is primarily used for iOS app development?",
+    "options": ["Java", "Kotlin", "Swift", "C#"],
+    "correct": 2,
+    "explanation": "Swift is Apple's programming language for iOS development."
+  },
+  {
+    "category": "Coding",
+    "question": "What is the time complexity of binary search?",
+    "options": ["O(n)", "O(n²)", "O(log n)", "O(1)"],
+    "correct": 2,
+    "explanation": "Binary search halves the search space each step, giving O(log n)."
+  },
+  {
+    "category": "Coding",
+    "question": "Which of these is NOT a JavaScript framework?",
+    "options": ["React", "Angular", "Django", "Vue"],
+    "correct": 2,
+    "explanation": "Django is a Python web framework, not JavaScript."
+  },
+  {
+    "category": "Coding",
+    "question": "What does CSS stand for?",
+    "options": ["Computer Style Sheets", "Cascading Style Sheets", "Creative Style System", "Colorful Style Sheets"],
+    "correct": 1,
+    "explanation": "CSS stands for Cascading Style Sheets."
+  },
+  {
+    "category": "Math",
+    "question": "What is the value of π (pi) to two decimal places?",
+    "options": ["3.12", "3.14", "3.16", "3.18"],
+    "correct": 1,
+    "explanation": "Pi (π) is approximately 3.14159..."
+  },
+  {
+    "category": "Math",
+    "question": "What is the square root of 144?",
+    "options": ["10", "11", "12", "14"],
+    "correct": 2,
+    "explanation": "12 × 12 = 144"
+  },
+  {
+    "category": "Math",
+    "question": "If a triangle has angles of 60°, 60°, and 60°, what type is it?",
+    "options": ["Isosceles", "Scalene", "Equilateral", "Right"],
+    "correct": 2,
+    "explanation": "A triangle with all angles equal (60°) is equilateral."
+  },
+  {
+    "category": "Math",
+    "question": "What is the derivative of x²?",
+    "options": ["x", "2x", "x³", "2x²"],
+    "correct": 1,
+    "explanation": "Using the power rule, d/dx(x²) = 2x."
+  },
+  {
+    "category": "Math",
+    "question": "What is 15% of 200?",
+    "options": ["15", "25", "30", "35"],
+    "correct": 2,
+    "explanation": "15/100 × 200 = 30"
+  },
+  {
+    "category": "Reasoning",
+    "question": "If all Bloops are Razzies and all Razzies are Lazzies, then all Bloops are definitely Lazzies?",
+    "options": ["True", "False", "Cannot be determined", "Sometimes"],
+    "correct": 0,
+    "explanation": "This is a classic syllogism — if A⊂B and B⊂C, then A⊂C."
+  },
+  {
+    "category": "Reasoning",
+    "question": "What comes next in the sequence: 2, 6, 12, 20, 30, ?",
+    "options": ["40", "42", "44", "48"],
+    "correct": 1,
+    "explanation": "Differences are 4, 6, 8, 10, 12 — so next is 30 + 12 = 42."
+  },
+  {
+    "category": "Reasoning",
+    "question": "A clock shows 3:15. What is the angle between the hour and minute hands?",
+    "options": ["0°", "7.5°", "15°", "30°"],
+    "correct": 1,
+    "explanation": "At 3:15, the minute hand is at 90° and the hour hand is at 97.5°, giving 7.5°."
+  },
+  {
+    "category": "Reasoning",
+    "question": "If you rearrange 'CIFAIPC', you get the name of a(n):",
+    "options": ["City", "Ocean", "Animal", "Country"],
+    "correct": 1,
+    "explanation": "CIFAIPC rearranges to PACIFIC — an ocean."
+  },
+  {
+    "category": "Reasoning",
+    "question": "Which number should replace the question mark: 1, 1, 2, 3, 5, 8, ?",
+    "options": ["10", "11", "13", "15"],
+    "correct": 2,
+    "explanation": "This is the Fibonacci sequence: 5 + 8 = 13."
+  },
+  {
+    "category": "Science",
+    "question": "What is the chemical symbol for Gold?",
+    "options": ["Go", "Gd", "Au", "Ag"],
+    "correct": 2,
+    "explanation": "Gold's symbol Au comes from Latin 'Aurum'."
+  },
+  {
+    "category": "Science",
+    "question": "How many planets are in our solar system?",
+    "options": ["7", "8", "9", "10"],
+    "correct": 1,
+    "explanation": "There are 8 planets since Pluto was reclassified in 2006."
+  },
+  {
+    "category": "Science",
+    "question": "What gas do plants absorb from the atmosphere?",
+    "options": ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"],
+    "correct": 2,
+    "explanation": "Plants absorb CO₂ for photosynthesis."
+  },
+  {
+    "category": "Science",
+    "question": "What is the speed of light in vacuum (approx)?",
+    "options": ["300,000 km/s", "150,000 km/s", "500,000 km/s", "1,000,000 km/s"],
+    "correct": 0,
+    "explanation": "The speed of light in vacuum is approximately 3 × 10⁸ m/s or 300,000 km/s."
+  },
+  {
+    "category": "Science",
+    "question": "Which element has the atomic number 1?",
+    "options": ["Helium", "Hydrogen", "Lithium", "Carbon"],
+    "correct": 1,
+    "explanation": "Hydrogen is the first element with atomic number 1."
+  },
+  {
+    "category": "General Knowledge",
+    "question": "What is the largest ocean on Earth?",
+    "options": ["Atlantic", "Indian", "Arctic", "Pacific"],
+    "correct": 3,
+    "explanation": "The Pacific Ocean covers about 63 million square miles."
+  },
+  {
+    "category": "General Knowledge",
+    "question": "How many continents are there?",
+    "options": ["5", "6", "7", "8"],
+    "correct": 2,
+    "explanation": "The 7 continents are Africa, Antarctica, Asia, Australia, Europe, North America, and South America."
+  },
+  {
+    "category": "General Knowledge",
+    "question": "What is the capital of Japan?",
+    "options": ["Seoul", "Beijing", "Tokyo", "Bangkok"],
+    "correct": 2,
+    "explanation": "Tokyo has been Japan's capital since 1868."
+  },
+  {
+    "category": "General Knowledge",
+    "question": "Which planet is known as the Red Planet?",
+    "options": ["Venus", "Mars", "Jupiter", "Saturn"],
+    "correct": 1,
+    "explanation": "Mars appears red due to iron oxide on its surface."
+  },
+  {
+    "category": "General Knowledge",
+    "question": "Who wrote 'Romeo and Juliet'?",
+    "options": ["Charles Dickens", "Mark Twain", "William Shakespeare", "Jane Austen"],
+    "correct": 2,
+    "explanation": "Shakespeare wrote Romeo and Juliet around 1594-1596."
+  }
+]
